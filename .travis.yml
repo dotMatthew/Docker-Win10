@@ -4,3 +4,6 @@ services:
 before_install:
     - docker pull debian:latest
     - docker build -t debian_test .
+
+script:
+    - docker exec -it debian_test /bin/sh
