@@ -3,4 +3,4 @@ services:
 
 before_install:
     - docker pull debian:latest
-    - docker run -t debian_test .
+    - docker build -t debian_test .
