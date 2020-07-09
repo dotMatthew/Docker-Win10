@@ -18,4 +18,18 @@
 # Main image (not the smallest but i like it xd ~md)
 FROM debian:latest
 
+ARG qemu_system_arch="x86_64"
+ARG size="100G"
+
 LABEL MAINTAINER="Mathias Dollenbacher <hello@mdollenbacher.net>"
+
+# Update the system and install some software
+RUN apt-get update -y && \
+    apt-get upgrade -y \
+    apt-get install x11-apps \
+    qemu-system qemu-system-${qemu_system_arch} \
+    ssh curl wget -y
+
+# Enable SSH for the main container
+RUN sed s/#PermitRootLogin/PermitRootLogin/g /etc/ssh/sshd_config | tee /etc/ssh/sshd_config
+
